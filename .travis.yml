@@ -1,0 +1,15 @@
+language: bash
+services:
+  - docker
+sudo: required
+branches:
+  only:
+    - master
+script:
+  - docker build . -t "quay.io/samblade/virtvnc:latest"
+
+after_success:
+  - docker login -u "${QUAY_IO_USERNAME}" -p "${QUAY_IO_PASSWORD}" quay.io 
+  - export
+  - docker push quay.io/samblade/virtvnc:lastest
+
