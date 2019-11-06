@@ -21,5 +21,5 @@ http://NODEIP:NODEPORT/
 
 If you want manager virtual machines in other namespace, you can specify namespace using query param namespace like following:
 ```
-http://NODEIP:NODEPORT/index.html?namespace=test
+http://NODEIP:NODEPORT/?namespace=test
 ```
