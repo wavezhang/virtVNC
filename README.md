@@ -23,3 +23,4 @@ If you want manager virtual machines in other namespace, you can specify namespa
 ```
 http://NODEIP:NODEPORT/?namespace=test
 ```
+![virtVNC](https://github.com/wavezhang/virtVNC/blob/master/virtvnc.gif?raw=true)
