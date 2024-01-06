@@ -90,7 +90,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: "Host(`*`) && PathPrefix(`/kv-novnc`)"    # Set desired hostname; PathPrefix must be /kv-novnc
+    - match: "Host(`kv-novnc.localhost`)"    # Set desired hostname
       kind: Rule
       middlewares:
         - name: mware-kv-novnc
@@ -130,7 +130,7 @@ spec:
         livenessProbe:
           httpGet:
             port: 8001
-            path: /kv-novnc
+            path: /
             scheme: HTTP
           failureThreshold: 30
           initialDelaySeconds: 30
