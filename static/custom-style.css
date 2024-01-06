@@ -1,4 +1,9 @@
- /* kubevirt-vnc simple css styling. */
+/* kubevirt-vnc simple css styling. */
+
+/* BODY */
+body {
+    font-family: Monaco, Sans-serif;
+}
 /* TABLE */
 table {
     border-collapse: collapse;

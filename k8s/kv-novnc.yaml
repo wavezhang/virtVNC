@@ -90,7 +90,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`kv-novnc.localhost`)    # Set desired hostname
+    - match: "Host(`*`) && PathPrefix(`/kv-novnc`)"    # Set desired hostname; PathPrefix must be /kv-novnc
       kind: Rule
       middlewares:
         - name: mware-kv-novnc
