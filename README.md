@@ -59,7 +59,7 @@ Pre-built container images are available here: https://github.com/users/scog/pac
 
 ## Example Screenshot
 
-![screenshot](https://github.com/scog/kubevirt-novnc/blob/master/example.png?raw=true)
+![screenshot](https://raw.githubusercontent.com/scog/kubevirt-novnc/main/example.png)
 
 ## MIT License
 
