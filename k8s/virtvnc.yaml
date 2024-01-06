@@ -1,26 +1,26 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: virtvnc
+  name: kv-novnc
   namespace: kubevirt
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: virtvnc
+  name: kv-novnc
 subjects:
 - kind: ServiceAccount
-  name: virtvnc
+  name: kv-novnc
   namespace: kubevirt
 roleRef:
   kind: ClusterRole
-  name: virtvnc
+  name: kv-novnc
   apiGroup: rbac.authorization.k8s.io
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: virtvnc
+  name: kv-novnc
 rules:
 - apiGroups:
   - subresources.kubevirt.io
@@ -46,8 +46,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: virtvnc
-  name: virtvnc
+    app: kv-novnc
+  name: kv-novnc
   namespace: kubevirt
 spec:
   ports:
@@ -55,25 +55,65 @@ spec:
     protocol: TCP
     targetPort: 8001
   selector:
-    app: virtvnc
-  type: NodePort
+    app: kv-novnc
+  type: ClusterIP
+---
+# Create k8s secret for basic HTTP authentication
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kv-novnc-basic-auth
+  namespace: traefik
+type: kubernetes.io/basic-auth
+data:
+  username: c29tZXVzZXI=    # default value: someuser (base64 encoded)
+  password: c29tZXBhc3M=    # default value: somepass (base64 encoded)
+---
+# Create Traefik MiddleWare with reference to secret above
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: mware-kv-novnc
+  namespace: traefik
+spec:
+  basicAuth:
+    removeHeader: true
+    secret: kv-novnc-basic-auth
+---
+# Create Traefik IngressRoute
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: route-kv-novnc
+  namespace: traefik
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`*`) && PathPrefix(`/kv-novnc`)    # Host can be dynamic; PathPrefix must match /kv-novnc
+      kind: Rule
+      services:
+        - name: kv-novnc
+          port: 8001
+  tls:
+    certResolver: default
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: virtvnc
+  name: kv-novnc
   namespace: kubevirt
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: virtvnc
+      app: kv-novnc
   template:
     metadata:
       labels:
-        app: virtvnc
+        app: kv-novnc
     spec:
-      serviceAccountName: virtvnc
+      serviceAccountName: kv-novnc
       nodeSelector:
         node-role.kubernetes.io/master: ''
       tolerations: 
@@ -82,8 +122,9 @@ spec:
         value: ""
         effect: "NoSchedule"
       containers:
-      - name: virtvnc
-        image: quay.io/samblade/virtvnc:v0.1
+      - name: kv-novnc
+        image: ghcr.io/scog/kv-novnc:latest
+        imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
             port: 8001
