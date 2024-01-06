@@ -9,10 +9,10 @@
     <!-- ES2015/ES6 modules polyfill -->
     <script nomodule src="vendor/browser-es-module-loader/dist/browser-es-module-loader.js"></script>
     <script type="module" crossorigin="anonymous">
-      import * as WebUtil from "./app/webutil.js";
+      //import * as WebUtil from "./app/webutil.js";
       const apiPrefix='k8s/apis'
       function loadVMI(namespace) {
-        WebUtil.fetchJSON('/' + apiPrefix + '/kubevirt.io/v1alpha3/namespaces/' + namespace + '/virtualmachineinstances/')
+        fetch('/' + apiPrefix + '/kubevirt.io/v1alpha3/namespaces/' + namespace + '/virtualmachineinstances/')
           .then((resp) => {
             let vmis = [];
             let tr = document.createElement('tr');
@@ -27,7 +27,8 @@
           })
           .catch(err => console.log("Failed to get vmis: " + err));
        }
-       let namespace = WebUtil.getQueryVar('namespace', 'default');
+       let urlParams = new URLSearchParams(window.location.search);
+       let namespace = urlParams.get('namespace');
        let hdr = document.createElement('h3');
        hdr.innerHTML = "kv-novnc &nbsp; / &nbsp;" + String(window.location.host !== undefined ? window.location.host : '?')
        document.getElementById("hdr").appendChild(hdr);
@@ -35,7 +36,7 @@
     </script>
   </meta>
   <body>
-    <div><h3 id="hdr">kv-novnc</h3></duv>
+    <div id="hdr"></duv>
     <table>
       <tbody id="vmis"></tbody>
     </table>
