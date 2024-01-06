@@ -9,7 +9,7 @@ Since 2024-01-05, the following enhancements have been made to the original fork
   - Bumped [`noVNC`](https://github.com/novnc/noVNC/tree/master/app) to `1.4.0` <small>(contents in [`/app`](app))</small>
   - Changed Service `NodePort` to `ClusterIP` ... thus intentionally removing access to `8001/tcp` from outside the k8s cluster
   - Added IngressRoute with Basic HTTP-Auth using [Traefik MiddleWares](https://doc.traefik.io/traefik/middlewares/http/basicauth/)
-  - Added basic CSS styling using [Bootstrap v5.3](https://getbootstrap.com/docs/5.3) for aesthetics 
+  - Added basic CSS styling using 
   - Changed k8s definitions from `virtvnc` to `kv-novnc` in effort to avoid confusion amongst the various forks of the original [wavezhang/virtVNC](https://github.com/wavezhang/virtVNC) project
 
 > [!WARNING]
