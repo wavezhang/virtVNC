@@ -10,9 +10,9 @@
     <script nomodule src="vendor/browser-es-module-loader/dist/browser-es-module-loader.js"></script>
     <script type="module" crossorigin="anonymous">
       //import * as WebUtil from "./app/webutil.js";
-      const apiPrefix='k8s/apis'
+      const apiPrefix='kv-novnc/k8s/apis'
       function loadVMI(namespace) {
-        fetch('/kv-novnc/' + apiPrefix + '/kubevirt.io/v1alpha3/namespaces/' + namespace + '/virtualmachineinstances/')
+        fetch('/' + apiPrefix + '/kubevirt.io/v1alpha3/namespaces/' + namespace + '/virtualmachineinstances/')
           .then((resp) => {
             let vmis = [];
             let tr = document.createElement('tr');

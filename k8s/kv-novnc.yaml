@@ -130,7 +130,7 @@ spec:
         livenessProbe:
           httpGet:
             port: 8001
-            path: /
+            path: /kv-novnc
             scheme: HTTP
           failureThreshold: 30
           initialDelaySeconds: 30
