@@ -3,6 +3,8 @@
 /* BODY */
 body {
     font-family: Monaco, Sans-serif;
+    background-color: #d3d3d3;
+    font-size: 16px;
 }
 /* TABLE */
 table {
@@ -10,7 +12,7 @@ table {
     width: 100%;
     color: #333;
     font-family: Arial, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     text-align: left;
     border-radius: 10px;
     overflow: hidden;
@@ -23,6 +25,7 @@ table th {
     background-color: #000278;
     color: #fff;
     font-weight: bold;
+    font-size: 20px;
     padding: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -40,6 +43,7 @@ table td {
     padding: 10px;
     border-bottom: 1px solid #ccc;
     font-weight: bold;
+    font-size: 16px;
 }
 
 /* BUTTON-17 */
@@ -56,7 +60,7 @@ table td {
     display: inline-flex;
     fill: currentcolor;
     font-family: "Google Sans",Roboto,Arial,sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     height: 48px;
     justify-content: center;
