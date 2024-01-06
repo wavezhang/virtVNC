@@ -92,6 +92,8 @@ spec:
   routes:
     - match: Host(`*`) && PathPrefix(`/kv-novnc`)    # Host can be dynamic; PathPrefix must match /kv-novnc
       kind: Rule
+      middlewares:
+        - name: mware-kv-novnc
       services:
         - name: kv-novnc
           port: 8001
