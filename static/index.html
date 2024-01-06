@@ -22,7 +22,7 @@
               document.getElementById("vmis").appendChild(tr);
             } else {
               data.items.forEach(i => {
-                tr.innerHTML="<td><button role='button' class='button-17' " + String(i.status.phase =="Running" ? "" : "disabled")  + " onclick=\"window.open('vnc_lite.html?path=" + apiPrefix + "/subresources.kubevirt.io/v1alpha3/namespaces/" + namespace + "/virtualmachineinstances/" + i.metadata.name + "/vnc', 'novnc_window', 'resizable=yes,toolbar=no,location=no,status=no,scrollbars=no,menubar=no,width=1300,height=850')\">" + i.metadata.name + "</button></td><td>" + String(i.status.nodeName !== undefined ? i.status.nodeName : '') + "</td><td>" + String(i.status.phase) + "</td><td>" + String(i.status.interfaces !== undefined ? i.status.interfaces[0].ipAddress : '')  + "</td><td></td>";
+                tr.innerHTML="<td><button role='button' class='button-17' " + String(i.status.phase =="Running" ? "" : "disabled")  + " onclick=\"window.open('vnc_lite.html?path=" + apiPrefix + "/subresources.kubevirt.io/v1alpha3/namespaces/" + namespace + "/virtualmachineinstances/" + i.metadata.name + "/vnc', 'novnc_window', 'resizable=yes,toolbar=no,location=no,status=no,scrollbars=no,menubar=no,width=1300,height=850')\">" + i.metadata.name + "</button></td><td>" + String(i.status.nodeName !== undefined ? i.status.nodeName : '') + "</td><td>" + String(i.status.phase) + "</td><td>" + String(i.status.interfaces !== undefined ? i.status.interfaces[0].ipAddress : '')  + "</td>";
                 document.getElementById("vmis").appendChild(tr);
               });
             }
@@ -37,7 +37,7 @@
     </script>
   </meta>
   <body>
-    <h3 id="hdr"></h3>
+    <h2 id="hdr"></h2>
     <table>
       <tr><th>VM Console</th><th>Node Name</th><th>Status</th><th>K8S IP Address</th></tr>
       <tbody id="vmis"></tbody>
