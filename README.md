@@ -65,29 +65,6 @@ Pre-built container images are available here: https://github.com/users/scog/pac
 
 ![screenshot](https://raw.githubusercontent.com/scog/kubevirt-novnc/main/example.png)
 
-# virtVNC
+---
 
-[noVNC](https://github.com/novnc/noVNC) for [kubevirt](https://github.com/kubevirt/kubevirt)
-
-## Deploy
-
-```bash
-kubectl apply -f https://github.com/wavezhang/virtVNC/raw/master/k8s/virtvnc.yaml
-```
-
-## Usage
-
-1. Get node port of ```virtvnc``` service
-```bash
-kubectl get svc -n kubevirt virtvnc
-```
-2. Visit following url in browser
-```
-http://NODEIP:NODEPORT/
-```
-
-If you want manager virtual machines in other namespace, you can specify namespace using query param namespace like following:
-```
-http://NODEIP:NODEPORT/?namespace=test
-```
-![virtVNC](https://github.com/wavezhang/virtVNC/blob/master/virtvnc.gif?raw=true)
+See [original repo for virtVNC here](https://github.com/wavezhang/virtVNC)
